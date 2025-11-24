@@ -4,12 +4,14 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
-@Table(name = "Task")
+@Table(name = "user")
 @Data
-public class Task {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String title;
-    private boolean completed;
+    private String username;
+    private String password;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Task task;
 }
