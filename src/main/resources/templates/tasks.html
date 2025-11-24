@@ -6,10 +6,17 @@
     <link rel="stylesheet" th:href="@{/tasksStyle.css}">
 </head>
 <body>
+<header>
+    <div>
+        <span class="user-icon" style="font-size: 24px;">&#128100;</span>
+        <span th:text="${session.user.username}">Username</span>
+    </div>
+    <a href="/api/v1/logout" class="btn btn-logout">Logout</a>
+</header>
 <div class="container">
     <h1>TodoApplication</h1>
 
-    <form action="/" method="post">
+    <form action="/api/v1/tasks" method="post">
         <input type="text"
                name="title"
                placeholder="Add a new task..."
@@ -27,8 +34,8 @@
             </span>
 
             <div>
-                <a th:href="@{/{id}/toggle(id=${task.id})}" class="btn btn-toggle">Toggle</a>
-                <a th:href="@{/{id}/delete(id=${task.id})}" class="btn btn-delete">Delete</a>
+                <a th:href="@{/api/v1/tasks/{id}/toggle(id=${task.id})}" class="btn btn-toggle">Toggle</a>
+                <a th:href="@{/api/v1/tasks/{id}/delete(id=${task.id})}" class="btn btn-delete">Delete</a>
             </div>
         </div>
     </th:block>

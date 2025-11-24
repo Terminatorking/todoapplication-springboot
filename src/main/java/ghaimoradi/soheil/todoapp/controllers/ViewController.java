@@ -18,9 +18,4 @@ public class ViewController {
     public String signup(){
         return "register";
     }
-
-    @GetMapping("/tasks")
-    public String home(){
-        return "tasks";
-    }
 }

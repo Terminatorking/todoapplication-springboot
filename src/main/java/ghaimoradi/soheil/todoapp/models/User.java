@@ -12,6 +12,4 @@ public class User {
     private Long id;
     private String username;
     private String password;
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Task task;
 }
