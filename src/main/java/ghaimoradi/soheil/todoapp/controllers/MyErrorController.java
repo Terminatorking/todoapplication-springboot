@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @SuppressWarnings("all")
-public class PageNotFoundErrorController implements ErrorController {
+public class MyErrorController implements ErrorController {
 
     @RequestMapping("/error")
     public String handleError() {
