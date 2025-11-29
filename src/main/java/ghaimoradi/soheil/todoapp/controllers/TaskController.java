@@ -12,6 +12,7 @@ import java.util.List;
 
 @Controller
 @SuppressWarnings("all")
+@RequestMapping("api/v1")
 public class TaskController {
     private final TaskService taskService;
 
@@ -19,7 +20,7 @@ public class TaskController {
         this.taskService = taskService;
     }
 
-    @GetMapping("/api/v1/tasks")
+    @GetMapping("/tasks")
     public String getTasks(Model model, HttpSession session) {
         User user = (User) session.getAttribute("user");
         if (user == null) {
@@ -30,7 +31,7 @@ public class TaskController {
         return "tasks";
     }
 
-    @PostMapping("/api/v1/tasks")
+    @PostMapping("/tasks")
     public String createTask(@RequestParam String title, HttpSession session) {
         User user = (User) session.getAttribute("user");
         if (user == null) {
@@ -40,7 +41,7 @@ public class TaskController {
         return "redirect:/api/v1/tasks";
     }
 
-    @GetMapping("/api/v1/tasks/{id}/delete")
+    @GetMapping("/tasks/{id}/delete")
     public String deleteTask(@PathVariable Long id, HttpSession session) {
         User user = (User) session.getAttribute("user");
         if (user == null) {
@@ -50,7 +51,7 @@ public class TaskController {
         return "redirect:/api/v1/tasks";
     }
 
-    @GetMapping("/api/v1/tasks/{id}/toggle")
+    @GetMapping("/tasks/{id}/toggle")
     public String toggleTask(@PathVariable Long id, HttpSession session) {
         User user = (User) session.getAttribute("user");
         if (user == null) {

@@ -2,7 +2,7 @@ package ghaimoradi.soheil.todoapp.controllers;
 
 import ghaimoradi.soheil.todoapp.models.User;
 import ghaimoradi.soheil.todoapp.services.UserService;
-import ghaimoradi.soheil.todoapp.utils.encryption.AES;
+import ghaimoradi.soheil.todoapp.utils.encryption.SHA256Hasher;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +23,7 @@ public class UserController {
     @PostMapping("/login")
     public String login(@RequestParam String username, @RequestParam String password, HttpSession session) {
         User user = userService.login(username);
-        if (user != null && AES.decryptAES(user.getPassword()).equals(password)) {
+        if (user != null && user.getPassword().equals(SHA256Hasher.hash(password))) {
             session.setAttribute("user", user);
             return "redirect:/api/v1/tasks";
         } else {

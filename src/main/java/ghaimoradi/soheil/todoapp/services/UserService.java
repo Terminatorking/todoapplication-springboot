@@ -2,7 +2,7 @@ package ghaimoradi.soheil.todoapp.services;
 
 import ghaimoradi.soheil.todoapp.models.User;
 import ghaimoradi.soheil.todoapp.repositories.UserRepository;
-import ghaimoradi.soheil.todoapp.utils.encryption.AES;
+import ghaimoradi.soheil.todoapp.utils.encryption.SHA256Hasher;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,7 +19,7 @@ public class UserService {
 
     public void register(String username, String password) {
         User user = new User();
-        user.setPassword(AES.encryptAES(password));
+        user.setPassword(SHA256Hasher.hash(password));
         user.setUsername(username);
         userRepository.save(user);
     }
