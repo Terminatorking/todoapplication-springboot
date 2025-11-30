@@ -14,14 +14,6 @@ body {
     background-size: cover;
 }
 
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    background-color: #ccc;
-}
-
 .container {
     width: 100%;
     margin: 40px auto;
@@ -42,7 +34,7 @@ form {
     margin-bottom: 25px;
 }
 
-input{
+input {
     background-color: #eee;
 }
 
@@ -59,7 +51,19 @@ input[type="text"]:focus {
     border-color: #007bff;
 }
 
-button[type="submit"] {
+button[type="submit"]:hover {
+    background-color: #0062cc;
+}
+
+.cancel {
+    justify-content: center;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.btn {
+    text-decoration: none;
     padding: 15px 25px;
     font-size: 18px;
     background-color: #007bff;
@@ -67,59 +71,4 @@ button[type="submit"] {
     border: none;
     border-radius: 8px;
     cursor: pointer;
-}
-
-button[type="submit"]:hover {
-    background-color: #0062cc;
-}
-
-.card {
-    margin-left: 50px;
-    margin-right: 150px;
-    border: 1px solid #ddd;
-    background: #eee;
-    padding: 18px;
-    border-radius: 10px;
-    margin-bottom: 12px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.task-title {
-    font-size: 18px;
-}
-
-.text-strikethrough {
-    text-decoration: line-through;
-    color: gray;
-}
-
-.btn {
-    padding: 8px 14px;
-    border-radius: 6px;
-    font-size: 14px;
-    cursor: pointer;
-    text-decoration: none;
-    border: 1px solid transparent;
-}
-
-.btn-toggle {
-    border-color: #777;
-    color: #444;
-}
-
-.btn-toggle:hover {
-    background-color: #e7e7e7;
-}
-
-.btn-delete {
-    border-color: #e74c3c;
-    color: #e74c3c;
-    margin-left: 8px;
-}
-
-.btn-delete:hover {
-    background-color: #e74c3c;
-    color: white;
 }

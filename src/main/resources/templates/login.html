@@ -1,28 +1,42 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>login</title>
-    <link rel="stylesheet" th:href="@{/authStyle.css}">
-</head>
-<body>
-<div>
-    <section>
+    <link rel="stylesheet" th:href="@{/authStyle.css}" />
+  </head>
+  <body>
+    <div>
+      <section>
         <form action="/api/v1/login" method="post">
-            <h1>Login</h1>
-            <div class="inputbox">
-                <input placeholder="User Name..." name="username" id="username" type="text" required>
-            </div>
-            <div class="inputbox">
-                <input placeholder="Password..." name="password" type="password" id="password" required>
-            </div>
-            <button>Log in</button>
-            <p th:if="${param.error}" class="error">Invalid username or password</p>
-            <div class="register">
-                <p>Don't have a account?<a href="/api/v1/register"> Register</a></p>
-            </div>
+          <h1>Login</h1>
+          <div class="inputbox">
+            <input
+              placeholder="User Name..."
+              name="username"
+              id="username"
+              type="text"
+              required
+            />
+          </div>
+          <div class="inputbox">
+            <input
+              placeholder="Password..."
+              name="password"
+              type="password"
+              id="password"
+              required
+            />
+          </div>
+          <button>Log in</button>
+          <p th:if="${param.error}" class="error">
+            Invalid username or password
+          </p>
+          <div class="register">
+            <p>Don't have a account?<a href="/api/v1/register"> Register</a></p>
+          </div>
         </form>
-    </section>
-</div>
-</body>
+      </section>
+    </div>
+  </body>
 </html>

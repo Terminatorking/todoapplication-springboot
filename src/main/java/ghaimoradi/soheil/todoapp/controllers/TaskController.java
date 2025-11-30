@@ -3,6 +3,7 @@ package ghaimoradi.soheil.todoapp.controllers;
 import ghaimoradi.soheil.todoapp.models.Task;
 import ghaimoradi.soheil.todoapp.models.User;
 import ghaimoradi.soheil.todoapp.services.TaskService;
+import ghaimoradi.soheil.todoapp.services.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,9 +16,11 @@ import java.util.List;
 @RequestMapping("api/v1")
 public class TaskController {
     private final TaskService taskService;
+    private final UserService userService;
 
-    public TaskController(TaskService taskService) {
+    public TaskController(TaskService taskService, UserService userService) {
         this.taskService = taskService;
+        this.userService = userService;
     }
 
     @GetMapping("/tasks")
@@ -28,6 +31,7 @@ public class TaskController {
         }
         List<Task> tasks = taskService.getTasksByUser(user);
         model.addAttribute("tasks", tasks);
+        model.addAttribute("user", user);
         return "tasks";
     }
 
@@ -58,6 +62,32 @@ public class TaskController {
             return "redirect:/api/v1/login";
         }
         taskService.toggleTask(id, user);
+        return "redirect:/api/v1/tasks";
+    }
+
+    @GetMapping("/tasks/{id}/edit")
+    public String showEditForm(@PathVariable Long id, Model model, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            return "redirect:/api/v1/login";
+        }
+        Task task = taskService.getTaskById(id);
+
+        if (task == null || !task.getUser().equals(user)) {
+            return "redirect:/api/v1/tasks";
+        }
+
+        model.addAttribute("task", task);
+        return "editTask";
+    }
+
+    @PostMapping("/tasks/{id}/edit")
+    public String updateTask(@PathVariable Long id, @RequestParam String title, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            return "redirect:/api/v1/login";
+        }
+        taskService.updateTask(id, title, user);
         return "redirect:/api/v1/tasks";
     }
 }

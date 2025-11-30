@@ -45,4 +45,18 @@ public class TaskService {
             taskRepository.save(task);
         }
     }
+
+    public Task getTaskById(Long id) {
+        return taskRepository.findById(id).orElse(null);
+    }
+
+    public void updateTask(Long id, String title, User user) {
+        Task task = taskRepository.findById(id).orElseThrow(
+                () -> new IllegalArgumentException("Invalid Task Id!")
+        );
+        if (task.getUser().equals(user)) {
+            task.setTitle(title);
+            taskRepository.save(task);
+        }
+    }
 }
