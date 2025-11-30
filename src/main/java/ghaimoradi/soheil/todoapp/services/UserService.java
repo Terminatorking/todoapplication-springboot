@@ -13,7 +13,7 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public User login(String username) {
+    public User getUserByUserName(String username) {
         return userRepository.findByUsername(username);
     }
 
