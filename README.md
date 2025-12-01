@@ -1,4 +1,3 @@
+You can see output of project here:
 
-
-https://github.com/user-attachments/assets/0e890d84-512c-4cb1-967b-02938ab2b780
-
+[Project output](https://drive.google.com/file/d/17jkukcJc3hMcWGmwHpjPi5lsdrSQbn8X/view?usp=drive_link)
