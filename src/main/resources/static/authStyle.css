@@ -44,7 +44,6 @@ h1 {
 }
 
 .inputbox {
-  position: relative;
   margin: 20px 0;
   max-width: 550px;
   border-bottom: 2px solid #fff;
@@ -59,16 +58,6 @@ h1 {
   font-size: 1rem;
   padding: 0 35px 0 5px;
   color: #fff;
-}
-
-.inputbox label {
-  position: absolute;
-  top: 50%;
-  left: 5px;
-
-  color: #fff;
-  font-size: 1rem;
-  pointer-events: none;
 }
 
 input::placeholder {
