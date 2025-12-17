@@ -1,13 +1,15 @@
 package ghaimoradi.soheil.todoapp.services;
 
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
 import ghaimoradi.soheil.todoapp.models.Task;
 import ghaimoradi.soheil.todoapp.models.User;
 import ghaimoradi.soheil.todoapp.repositories.TaskRepository;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
+@SuppressWarnings("all")
 public class TaskService {
     private final TaskRepository taskRepository;
 
