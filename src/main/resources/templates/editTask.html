@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8"/>
+  <head>
+    <meta charset="UTF-8" />
     <title>Edit Task</title>
-    <link rel="stylesheet" th:href="@{/editTaskStyle.css}"/>
-</head>
-<body>
-<div class="container">
-    <h1>Edit Task</h1>
+    <link rel="stylesheet" th:href="@{/editTaskStyle.css}" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Edit Task</h1>
 
-    <form
-            th:action="@{/api/v1/tasks/{id}/edit(id=${task.id})}"
-            th:object="${task}"
-            method="post"
-    >
-        <input type="text" th:field="*{title}" required/>
+      <form
+        th:action="@{/api/v1/tasks/{id}/edit(id=${task.id})}"
+        th:object="${task}"
+        method="post"
+      >
+        <input type="text" th:field="*{title}" required />
         <button type="submit" class="btn">Update</button>
-    </form>
-    <div class="cancel">
+      </form>
+      <div class="cancel">
         <a href="/api/v1/tasks" class="btn">Cancel</a>
+      </div>
     </div>
-</div>
-</body>
+  </body>
 </html>
