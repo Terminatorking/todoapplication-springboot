@@ -22,18 +22,31 @@ public class ReminderService {
     // This method will be executed every 10 seconds
     @Scheduled(fixedRate = 10000)
     public void sendReminders() {
+        System.out.println("--- Checking for reminders at " + LocalDateTime.now() + " ---");
         LocalDateTime now = LocalDateTime.now();
-        List<Task> tasksToRemind = taskRepository.findByReminderDate(now);
+        // Using the corrected repository method name
+        List<Task> tasksToRemind = taskRepository.findByReminderDateLessThanEqualAndReminderSentIsFalse(now);
+
+        if (tasksToRemind.isEmpty()) {
+            // System.out.println("No tasks to remind right now.");
+            return; // Exit if no tasks are found
+        }
+
+        System.out.println("Found " + tasksToRemind.size() + " tasks to remind.");
 
         for (Task task : tasksToRemind) {
-            // Send notification to the user's topic
-            // We assume the user is subscribed to /topic/reminders/{userId}
-            String destination = "/topic/reminders/" + task.getUser().getId();
-            messagingTemplate.convertAndSend(destination, "Reminder: " + task.getTitle());
+            try {
+                System.out.println("Processing reminder for task ID: " + task.getId() + " - '" + task.getTitle() + "'");
+                String destination = "/topic/reminders/" + task.getUser().getId();
+                messagingTemplate.convertAndSend(destination, "Reminder: " + task.getTitle());
+                System.out.println("Sent message to " + destination);
 
-            // Mark the reminder as sent
-            task.setReminderSent(true);
-            taskRepository.save(task);
+                task.setReminderSent(true);
+                taskRepository.save(task);
+                System.out.println("Task ID: " + task.getId() + " marked as sent.");
+            } catch (Exception e) {
+                System.err.println("Error processing reminder for task ID: " + task.getId() + " - " + e.getMessage());
+            }
         }
     }
 }
