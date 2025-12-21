@@ -25,7 +25,7 @@ public class ReminderService {
         System.out.println("--- Checking for reminders at " + LocalDateTime.now() + " ---");
         LocalDateTime now = LocalDateTime.now();
         // Using the corrected repository method name
-        List<Task> tasksToRemind = taskRepository.findByReminderDateLessThanEqualAndReminderSentIsFalse(now);
+        List<Task> tasksToRemind = taskRepository.findByReminderDate(now);
 
         if (tasksToRemind.isEmpty()) {
             // System.out.println("No tasks to remind right now.");

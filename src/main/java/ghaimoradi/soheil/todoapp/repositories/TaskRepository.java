@@ -8,6 +8,5 @@ import java.time.LocalDateTime;
 
 public interface TaskRepository extends JpaRepository<Task, Long> {
     List<Task> findByUser(User user);
-    // Corrected the keyword from BeforeOrEqual to LessThanEqual
-    List<Task> findByReminderDateLessThanEqualAndReminderSentIsFalse(LocalDateTime dateTime);
+    List<Task> findByReminderDate(LocalDateTime dateTime);
 }
