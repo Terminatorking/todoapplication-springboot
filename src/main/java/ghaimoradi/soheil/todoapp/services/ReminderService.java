@@ -19,31 +19,24 @@ public class ReminderService {
     @Autowired
     private SimpMessagingTemplate messagingTemplate;
 
-    // This method will be executed every 10 seconds
+    // This method will be executed every 1 seconds
     @Scheduled(fixedRate = 1000)
     public void sendReminders() {
-        System.out.println("--- Checking for reminders at " + LocalDateTime.now() + " ---");
         LocalDateTime now = LocalDateTime.now();
-        // Using the corrected repository method name
         List<Task> tasksToRemind = taskRepository.findByReminderDate(now);
 
         if (tasksToRemind.isEmpty()) {
-            // System.out.println("No tasks to remind right now.");
-            return; // Exit if no tasks are found
+            return;
         }
-
-        System.out.println("Found " + tasksToRemind.size() + " tasks to remind.");
 
         for (Task task : tasksToRemind) {
             try {
-                System.out.println("Processing reminder for task ID: " + task.getId() + " - '" + task.getTitle() + "'");
                 String destination = "/topic/reminders/" + task.getUser().getId();
                 messagingTemplate.convertAndSend(destination, "Reminder: " + task.getTitle());
                 System.out.println("Sent message to " + destination);
 
                 task.setReminderSent(true);
                 taskRepository.save(task);
-                System.out.println("Task ID: " + task.getId() + " marked as sent.");
             } catch (Exception e) {
                 System.err.println("Error processing reminder for task ID: " + task.getId() + " - " + e.getMessage());
             }

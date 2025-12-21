@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <title>TodoApplication</title>
-    <link rel="stylesheet" th:href="@{/tasksStyle.css}" />
+    <link rel="stylesheet" th:href="@{/styles/tasksStyle.css}" />
     <!-- SockJS and Stomp.js libraries for WebSocket -->
     <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/stompjs@2.3.3/lib/stomp.min.js"></script>
@@ -56,7 +56,7 @@
     </div>
 
     <!-- Reference the external JavaScript file -->
-    <script th:src="@{/websocket.js}"></script>
+    <script th:src="@{/js/websocket.js}"></script>
 
 </body>
 </html>
