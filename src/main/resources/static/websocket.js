@@ -1,5 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
     const userInfo = document.getElementById('user-info');
+    if (!userInfo) {
+        console.error('User info element not found.');
+        return;
+    }
+
     const userId = userInfo.getAttribute('data-user-id');
 
     if (userId) {
@@ -18,5 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }, function (error) {
             console.error('STOMP error: ' + error);
         });
+    } else {
+        console.error('User ID not found.');
     }
 });

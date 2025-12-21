@@ -20,7 +20,7 @@ public class ReminderService {
     private SimpMessagingTemplate messagingTemplate;
 
     // This method will be executed every 10 seconds
-    @Scheduled(fixedRate = 10000)
+    @Scheduled(fixedRate = 1000)
     public void sendReminders() {
         System.out.println("--- Checking for reminders at " + LocalDateTime.now() + " ---");
         LocalDateTime now = LocalDateTime.now();
