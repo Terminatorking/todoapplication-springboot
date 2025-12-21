@@ -2,6 +2,7 @@ package ghaimoradi.soheil.todoapp.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "Task")
@@ -12,6 +13,8 @@ public class Task {
     private Long id;
     private String title;
     private boolean completed;
+    private LocalDateTime reminderDate;
+    private boolean reminderSent;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;

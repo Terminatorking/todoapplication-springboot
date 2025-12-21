@@ -1,5 +1,6 @@
 package ghaimoradi.soheil.todoapp.services;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -21,11 +22,13 @@ public class TaskService {
         return taskRepository.findByUser(user);
     }
 
-    public void createTask(String title, User user) {
+    public void createTask(String title, User user, LocalDateTime reminderDate) {
         Task task = new Task();
         task.setTitle(title);
         task.setCompleted(false);
         task.setUser(user);
+        task.setReminderDate(reminderDate);
+        task.setReminderSent(false); // Default to false
         taskRepository.save(task);
     }
 

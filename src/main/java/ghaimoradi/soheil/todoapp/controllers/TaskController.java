@@ -5,10 +5,11 @@ import ghaimoradi.soheil.todoapp.models.User;
 import ghaimoradi.soheil.todoapp.services.TaskService;
 import ghaimoradi.soheil.todoapp.services.UserService;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -36,12 +37,18 @@ public class TaskController {
     }
 
     @PostMapping("/tasks")
-    public String createTask(@RequestParam String title, HttpSession session) {
+    public String createTask(
+            @RequestParam String title,
+            @RequestParam(required = false)
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+            LocalDateTime reminderDate,
+            HttpSession session
+    ) {
         User user = (User) session.getAttribute("user");
         if (user == null) {
             return "redirect:/api/v1/login";
         }
-        taskService.createTask(title, user);
+        taskService.createTask(title, user, reminderDate);
         return "redirect:/api/v1/tasks";
     }
 
