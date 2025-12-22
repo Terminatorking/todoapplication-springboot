@@ -33,8 +33,6 @@ public class ReminderService {
             try {
                 String destination = "/topic/reminders/" + task.getUser().getId();
                 messagingTemplate.convertAndSend(destination, "Reminder: " + task.getTitle());
-                System.out.println("Sent message to " + destination);
-
                 task.setReminderSent(true);
                 taskRepository.save(task);
             } catch (Exception e) {

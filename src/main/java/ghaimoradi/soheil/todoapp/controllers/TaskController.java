@@ -9,6 +9,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -19,7 +20,10 @@ public class TaskController {
     private final TaskService taskService;
     private final UserService userService;
 
-    public TaskController(TaskService taskService, UserService userService) {
+    public TaskController(
+            TaskService taskService,
+            UserService userService
+    ) {
         this.taskService = taskService;
         this.userService = userService;
     }
@@ -73,7 +77,11 @@ public class TaskController {
     }
 
     @GetMapping("/tasks/{id}/edit")
-    public String showEditForm(@PathVariable Long id, Model model, HttpSession session) {
+    public String showEditForm(
+            @PathVariable Long id,
+            Model model,
+            HttpSession session
+    ) {
         User user = (User) session.getAttribute("user");
         if (user == null) {
             return "redirect:/api/v1/login";
@@ -89,7 +97,11 @@ public class TaskController {
     }
 
     @PostMapping("/tasks/{id}/edit")
-    public String updateTask(@PathVariable Long id, @RequestParam String title, HttpSession session) {
+    public String updateTask(
+            @PathVariable Long id,
+            @RequestParam String title,
+            HttpSession session
+    ) {
         User user = (User) session.getAttribute("user");
         if (user == null) {
             return "redirect:/api/v1/login";

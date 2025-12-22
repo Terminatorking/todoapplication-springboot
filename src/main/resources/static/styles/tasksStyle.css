@@ -42,17 +42,20 @@ form {
     margin-bottom: 25px;
 }
 
-input{
+input {
     background-color: #eee;
 }
 
-input[type="text"] {
-    flex: 1;
+input {
     padding: 15px;
     font-size: 18px;
     border: 1px solid #ddd;
     border-radius: 8px;
     outline: none;
+}
+
+input[type="text"] {
+ flex: 1;
 }
 
 input[type="text"]:focus {

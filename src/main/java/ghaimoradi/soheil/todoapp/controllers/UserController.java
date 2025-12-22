@@ -21,7 +21,11 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestParam String username, @RequestParam String password, HttpSession session) {
+    public String login(
+            @RequestParam String username,
+            @RequestParam String password,
+            HttpSession session
+    ) {
         User user = userService.getUserByUserName(username);
         if (user != null && user.getPassword().equals(SHA256Hasher.hash(password))) {
             session.setAttribute("user", user);
@@ -32,7 +36,10 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String register(@RequestParam String username, @RequestParam String password) {
+    public String register(
+            @RequestParam String username,
+            @RequestParam String password
+    ) {
         if (userService.getUserByUserName(username) != null) {
             return "redirect:/api/v1/register?error";
         }

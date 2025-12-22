@@ -28,7 +28,7 @@ public class TaskService {
         task.setCompleted(false);
         task.setUser(user);
         task.setReminderDate(reminderDate);
-        task.setReminderSent(false); // Default to false
+        task.setReminderSent(false);
         taskRepository.save(task);
     }
 

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @SuppressWarnings("all")
 @RequestMapping("api/v1")
-public class ViewController {
+public class AuthController {
 
     @GetMapping("/login")
     public String login(){
