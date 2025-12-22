@@ -101,13 +101,16 @@ public class TaskController {
     public String updateTask(
             @PathVariable Long id,
             @RequestParam String title,
+            @RequestParam(required = false)
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+            LocalDateTime reminderDate,
             HttpSession session
     ) {
         User user = (User) session.getAttribute("user");
         if (user == null) {
             return "redirect:/api/v1/login";
         }
-        taskService.updateTask(id, title, user);
+        taskService.updateTask(id, title, reminderDate, user);
         return "redirect:/api/v1/tasks";
     }
 }

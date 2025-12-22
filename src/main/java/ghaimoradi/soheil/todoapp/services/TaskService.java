@@ -28,7 +28,7 @@ public class TaskService {
         task.setCompleted(false);
         task.setUser(user);
         task.setReminderDate(reminderDate);
-        task.setReminderSent(false);
+        task.setReminderSent(reminderDate == null);
         taskRepository.save(task);
     }
 
@@ -55,12 +55,14 @@ public class TaskService {
         return taskRepository.findById(id).orElse(null);
     }
 
-    public void updateTask(Long id, String title, User user) {
+    public void updateTask(Long id, String title, LocalDateTime reminderDate, User user) {
         Task task = taskRepository.findById(id).orElseThrow(
                 () -> new IllegalArgumentException("Invalid Task Id!")
         );
         if (task.getUser().equals(user)) {
             task.setTitle(title);
+            task.setReminderDate(reminderDate);
+            task.setReminderSent(reminderDate == null);
             taskRepository.save(task);
         }
     }
