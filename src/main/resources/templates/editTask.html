@@ -1,25 +1,30 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Edit Task</title>
-    <link rel="stylesheet" th:href="@{/styles/editTaskStyle.css}" />
-  </head>
-  <body>
-    <div class="container">
-      <h1>Edit Task</h1>
 
-      <form
-        th:action="@{/api/v1/tasks/{id}/edit(id=${task.id})}"
-        th:object="${task}"
-        method="post"
-      >
-        <input type="text" th:field="*{title}" required />
-        <button type="submit" class="btn">Update</button>
-      </form>
-      <div class="cancel">
-        <a href="/api/v1/tasks" class="btn">Cancel</a>
-      </div>
+<head>
+  <meta charset="UTF-8" />
+  <title>Edit Task</title>
+  <link rel="stylesheet" th:href="@{/styles/editTaskStyle.css(v=1.0)}" />
+</head>
+
+<body>
+  <header>
+    <div>
+      <span class="user-icon" style="font-size: 24px">&#128100;</span>
+      <span th:text="${user.username}" th:data-user-id="${user.id}" id="user-info">Username</span>
     </div>
-  </body>
+    <a href="/api/v1/logout" class="btn-logout">Logout</a>
+  </header>
+  <div class="container">
+    <h1>Edit Task</h1>
+    <form th:action="@{/api/v1/tasks/{id}/edit(id=${task.id})}" th:object="${task}" method="post">
+      <input type="text" th:field="*{title}" required />
+      <input type="datetime-local" name="reminderDate" class="reminder-date-input" />
+      <button type="submit" class="btn">Update</button>
+    </form>
+    <div class="cancel">
+      <a href="/api/v1/tasks" class="btn">Cancel</a>
+    </div>
+  </div>
+</body>
 </html>

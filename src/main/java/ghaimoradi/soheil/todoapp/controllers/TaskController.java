@@ -93,6 +93,7 @@ public class TaskController {
         }
 
         model.addAttribute("task", task);
+        model.addAttribute("user", user);
         return "editTask";
     }
 
