@@ -4,6 +4,7 @@
     margin: 0;
     padding: 0;
     font-family: "Poppins", sans-serif;
+    box-sizing: border-box;
 }
 
 body {
@@ -18,13 +19,15 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
+    padding: 10px 20px;
     background-color: #ccc;
 }
 
 .container {
     width: 100%;
+    max-width: 900px;
     margin: 40px auto;
+    padding: 0 20px;
 }
 
 h1 {
@@ -37,16 +40,11 @@ h1 {
 form {
     display: flex;
     gap: 10px;
-    margin-left: 50px;
-    margin-right: 150px;
     margin-bottom: 25px;
 }
 
 input {
     background-color: #eee;
-}
-
-input {
     padding: 15px;
     font-size: 18px;
     border: 1px solid #ddd;
@@ -55,11 +53,7 @@ input {
 }
 
 input[type="text"] {
- flex: 1;
-}
-
-input[type="text"]:focus {
-    border-color: #007bff;
+    flex: 1;
 }
 
 button[type="submit"] {
@@ -77,8 +71,6 @@ button[type="submit"]:hover {
 }
 
 .card {
-    margin-left: 50px;
-    margin-right: 150px;
     border: 1px solid #ddd;
     background: #eee;
     padding: 18px;
@@ -87,15 +79,23 @@ button[type="submit"]:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 15px;
 }
 
 .task-title {
     font-size: 18px;
+    word-break: break-word;
 }
 
 .text-strikethrough {
     text-decoration: line-through;
     color: gray;
+}
+
+.task-actions {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
 }
 
 .btn {
@@ -105,6 +105,7 @@ button[type="submit"]:hover {
     cursor: pointer;
     text-decoration: none;
     border: 1px solid transparent;
+    margin-left: 8px;
 }
 
 .btn-toggle {
@@ -119,10 +120,43 @@ button[type="submit"]:hover {
 .btn-delete {
     border-color: #e74c3c;
     color: #e74c3c;
-    margin-left: 8px;
 }
 
 .btn-delete:hover {
     background-color: #e74c3c;
     color: white;
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 28px;
+    }
+
+    form {
+        flex-direction: column;
+    }
+
+    .card {
+        flex-wrap: wrap;
+        align-items: flex-start;
+    }
+
+    .task-actions {
+        display: flex;
+        justify-content: flex-end;
+    }
+}
+
+@media (max-width: 503px) {
+    .task-content {
+        align-items: center;
+        flex-direction: column;
+        display: flex;
+        width: 100%;
+    }
+
+    .task-actions {
+        justify-content: center;
+        width: 100%;
+    }
 }
