@@ -3,7 +3,9 @@ package ghaimoradi.soheil.todoapp.services;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
+
 import org.springframework.stereotype.Service;
+
 import ghaimoradi.soheil.todoapp.models.Task;
 import ghaimoradi.soheil.todoapp.models.User;
 import ghaimoradi.soheil.todoapp.repositories.TaskRepository;
@@ -26,6 +28,10 @@ public class TaskService {
             return taskRepository.findByUserAndHasReminder(user, true);
         }
         return taskRepository.findByUser(user);
+    }
+
+    public List<Task> searchTasks(User user, String query) {
+        return taskRepository.findByUserAndTitleContainingIgnoreCase(user, query);
     }
 
     public void createTask(String title, User user, LocalDateTime reminderDate) {

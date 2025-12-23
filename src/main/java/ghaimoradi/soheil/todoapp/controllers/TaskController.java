@@ -46,6 +46,26 @@ public class TaskController {
         return "tasks";
     }
 
+    @GetMapping("/search")
+    public String searchTasks(
+            @RequestParam(value = "query", required = false)
+            String query,
+            HttpSession session,
+            Model model
+    ) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            return "redirect:/api/v1/login";
+        }
+        if (query != null && !query.trim().isEmpty()) {
+            List<Task> tasks = taskService.searchTasks(user, query);
+            model.addAttribute("tasks", tasks);
+        }
+        model.addAttribute("query", query);
+        model.addAttribute("user", user);
+        return "search";
+    }
+
     @PostMapping("/tasks")
     public String createTask(
             @RequestParam String title,

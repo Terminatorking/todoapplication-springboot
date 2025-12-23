@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TodoApplication</title>
-    <link rel="stylesheet" th:href="@{/styles/tasksStyle.css(v=2)}" />
+    <link rel="stylesheet" th:href="@{/styles/tasksStyle.css(v=2.1)}" />
     <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/stompjs@2.3.3/lib/stomp.min.js"></script>
 </head>
@@ -16,7 +16,14 @@
             <span class="user-icon" style="font-size: 24px">&#128100;</span>
             <span th:text="${user.username}" th:data-user-id="${user.id}" id="user-info">Username</span>
         </div>
-        <a href="/api/v1/logout" class="btn btn-logout">Logout</a>
+        <div style="display: flex; align-items: center;justify-content: center;">
+            <a style="text-decoration: none" th:href="@{/api/v1/search}">
+                <span class="search-icon" style="font-size: 24px; cursor: pointer;">
+                    &#x1F50D;
+                </span>
+            </a>
+            <a href="/api/v1/logout" class="btn btn-logout">Logout</a>
+        </div>
     </header>
     <div class="container">
         <h1>TodoApplication</h1>
@@ -28,10 +35,15 @@
         </form>
 
         <div class="filter-container">
-            <a th:href="@{/api/v1/tasks(filter=all)}" class="btn-filter" th:classappend="${currentFilter == 'all' ? 'active' : ''}">All</a>
-            <a th:href="@{/api/v1/tasks(filter=incomplete)}" class="btn-filter" th:classappend="${currentFilter == 'incomplete' ? 'active' : ''}">Incomplete</a>
-            <a th:href="@{/api/v1/tasks(filter=completed)}" class="btn-filter" th:classappend="${currentFilter == 'completed' ? 'active' : ''}">Completed</a>
-            <a th:href="@{/api/v1/tasks(filter=hasReminder)}" class="btn-filter" th:classappend="${currentFilter == 'completed' ? 'active' : ''}">HasReminder</a>
+            <a th:href="@{/api/v1/tasks(filter=all)}" class="btn-filter"
+                th:classappend="${currentFilter == 'all' ? 'active' : ''}">All</a>
+            <a th:href="@{/api/v1/tasks(filter=incomplete)}" class="btn-filter"
+                th:classappend="${currentFilter == 'incomplete' ? 'active' : ''}">Incomplete</a>
+            <a th:href="@{/api/v1/tasks(filter=completed)}" class="btn-filter"
+                th:classappend="${currentFilter == 'completed' ? 'active' : ''}">Completed</a>
+            <!-- Corrected the active class condition for hasReminder -->
+            <a th:href="@{/api/v1/tasks(filter=hasReminder)}" class="btn-filter"
+                th:classappend="${currentFilter == 'hasReminder' ? 'active' : ''}">Has Reminder</a>
         </div>
 
         <th:block th:each="task : ${tasks}">
@@ -42,7 +54,8 @@
                         Task Title
                     </span>
                     <div class="reminder-info" th:if="${task.reminderDate != null}">
-                        <small th:text="'Reminder: ' + ${#temporals.format(task.reminderDate, 'yyyy-MM-dd HH:mm')}"></small>
+                        <small th:text="'Reminder: ' + ${#temporals.format(task.reminderDate, 'yyyy-MM-dd HH:mm')}">
+                        </small>
                     </div>
                 </div>
 

@@ -165,6 +165,7 @@ button[type="submit"]:hover {
     }
 
     .filter-container {
+        flex-wrap: wrap;
         justify-content: center;
     }
 
