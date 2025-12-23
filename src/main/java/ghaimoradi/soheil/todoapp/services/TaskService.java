@@ -2,6 +2,7 @@ package ghaimoradi.soheil.todoapp.services;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,12 @@ public class TaskService {
         this.taskRepository = taskRepository;
     }
 
-    public List<Task> getTasksByUser(User user) {
+    public List<Task> getTasksByUser(User user, String filter) {
+        if (Objects.equals(filter, "completed")) {
+            return taskRepository.findByUserAndCompleted(user, true);
+        } else if (Objects.equals(filter, "incomplete")) {
+            return taskRepository.findByUserAndCompleted(user, false);
+        }
         return taskRepository.findByUser(user);
     }
 

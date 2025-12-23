@@ -29,14 +29,20 @@ public class TaskController {
     }
 
     @GetMapping("/tasks")
-    public String getTasks(Model model, HttpSession session) {
+    public String getTasks(
+            Model model,
+            HttpSession session,
+            @RequestParam(required = false, defaultValue = "all")
+            String filter
+    ) {
         User user = (User) session.getAttribute("user");
         if (user == null) {
             return "redirect:/api/v1/login";
         }
-        List<Task> tasks = taskService.getTasksByUser(user);
+        List<Task> tasks = taskService.getTasksByUser(user, filter);
         model.addAttribute("tasks", tasks);
         model.addAttribute("user", user);
+        model.addAttribute("currentFilter", filter);
         return "tasks";
     }
 
