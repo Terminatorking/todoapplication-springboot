@@ -3,9 +3,7 @@ package ghaimoradi.soheil.todoapp.services;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
-
 import org.springframework.stereotype.Service;
-
 import ghaimoradi.soheil.todoapp.models.Task;
 import ghaimoradi.soheil.todoapp.models.User;
 import ghaimoradi.soheil.todoapp.repositories.TaskRepository;
@@ -24,6 +22,8 @@ public class TaskService {
             return taskRepository.findByUserAndCompleted(user, true);
         } else if (Objects.equals(filter, "incomplete")) {
             return taskRepository.findByUserAndCompleted(user, false);
+        } else if (Objects.equals(filter, "hasReminder")) {
+            return taskRepository.findByUserAndHasReminder(user, true);
         }
         return taskRepository.findByUser(user);
     }
@@ -34,7 +34,7 @@ public class TaskService {
         task.setCompleted(false);
         task.setUser(user);
         task.setReminderDate(reminderDate);
-        task.setHasReminder(reminderDate == null);
+        task.setHasReminder(reminderDate != null);
         taskRepository.save(task);
     }
 
@@ -68,7 +68,7 @@ public class TaskService {
         if (task.getUser().equals(user)) {
             task.setTitle(title);
             task.setReminderDate(reminderDate);
-            task.setHasReminder(reminderDate == null);
+            task.setHasReminder(reminderDate != null);
             taskRepository.save(task);
         }
     }

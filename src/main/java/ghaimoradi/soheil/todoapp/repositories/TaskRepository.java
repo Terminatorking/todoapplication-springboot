@@ -10,4 +10,5 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
     List<Task> findByUser(User user);
     List<Task> findByReminderDate(LocalDateTime dateTime);
     List<Task> findByUserAndCompleted(User user, boolean completed);
+    List<Task> findByUserAndHasReminder(User user, boolean hasReminder);
 }
