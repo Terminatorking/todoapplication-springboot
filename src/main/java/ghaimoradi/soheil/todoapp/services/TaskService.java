@@ -34,7 +34,7 @@ public class TaskService {
         task.setCompleted(false);
         task.setUser(user);
         task.setReminderDate(reminderDate);
-        task.setReminderSent(reminderDate == null);
+        task.setHasReminder(reminderDate == null);
         taskRepository.save(task);
     }
 
@@ -68,7 +68,7 @@ public class TaskService {
         if (task.getUser().equals(user)) {
             task.setTitle(title);
             task.setReminderDate(reminderDate);
-            task.setReminderSent(reminderDate == null);
+            task.setHasReminder(reminderDate == null);
             taskRepository.save(task);
         }
     }

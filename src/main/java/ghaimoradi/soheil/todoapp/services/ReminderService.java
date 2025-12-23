@@ -33,7 +33,7 @@ public class ReminderService {
             try {
                 String destination = "/topic/reminders/" + task.getUser().getId();
                 messagingTemplate.convertAndSend(destination, "Reminder: " + task.getTitle());
-                task.setReminderSent(true);
+                task.setHasReminder(true);
                 taskRepository.save(task);
             } catch (Exception e) {
                 System.err.println("Error processing reminder for task ID: " + task.getId() + " - " + e.getMessage());

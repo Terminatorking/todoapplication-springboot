@@ -14,7 +14,7 @@ public class Task {
     private String title;
     private boolean completed;
     private LocalDateTime reminderDate;
-    private boolean reminderSent;
+    private boolean hasReminder;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
